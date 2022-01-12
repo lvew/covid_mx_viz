@@ -1,3 +1,5 @@
+mkdir -p ~/.streamlit
+
 echo "[theme]
 base="light"
 backgroundColor="#f5f4f2"
