@@ -27,7 +27,7 @@ muerte_semana_entidad = muertes_estatal.groupby("semana").sum().reset_index()
 
 @st.experimental_memo
 # Función para los datos Nacionales
-def graph_nac(base, tiempo: str, tipo: str):
+def graph_nac(base, tiempo: str):
     fig = px.bar(
         base,
         x=f"{tiempo}",
@@ -42,7 +42,7 @@ def graph_nac(base, tiempo: str, tipo: str):
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(10,10,10,0)",
     )
-    if tipo == "defunciones":
+    if (base is death1) or (base is death2):
         fig.update_traces(marker_color="gray")
     return fig
 
@@ -91,7 +91,7 @@ def graph_tot(base, tiempo: str):
 
 
 # Función para graficar entidad por entidad
-def graph_estatal(base, tiempo: str, entidad: str, tipo: str):
+def graph_estatal(base, tiempo: str, entidad: str):
     fig = px.bar(
         base,
         x=f"{tiempo}",
@@ -102,7 +102,7 @@ def graph_estatal(base, tiempo: str, entidad: str, tipo: str):
         width=1000,
         height=400,
     )
-    if tipo == "defunciones":
+    if (base is muertes_estatal) or (base is muerte_semana_entidad):
         fig.update_traces(marker_color="gray")
     return fig
 
@@ -150,14 +150,14 @@ if selection == "Positivos diarios":
     st.subheader("Casos positivos diarios, por fecha de síntoma")
 
     # Nacional
-    st.plotly_chart(graph_nac(contagios, "Fecha", ""))
+    st.plotly_chart(graph_nac(contagios, "Fecha"))
 
     # Cada entidad
     st.subheader("Casos positivos diarios, por entidad")
     entidades = contagios_estatal.columns[1:33]
     entidad = st.selectbox("Selecciona una entidad:", entidades)
     if entidad == (f"{entidad}"):
-        st.plotly_chart(graph_estatal(contagios_estatal, "Fecha", f"{entidad}", ""))
+        st.plotly_chart(graph_estatal(contagios_estatal, "Fecha", f"{entidad}"))
 
     # Todas entidades.
     st.subheader("Casos positivos diarios, todas las entidades")
@@ -169,14 +169,19 @@ elif selection == "Positivos semanales":
     st.subheader("Casos positivos semanales, por fecha de síntoma")
 
     # Nacional
-    st.plotly_chart(graph_nac(contagsemanal, "semana", ""))
+    st.plotly_chart(
+        graph_nac(
+            contagsemanal,
+            "semana",
+        )
+    )
 
     # Cada entidad
     st.subheader("Casos positivos semanales, por entidad")
     entidades = contagios_estatal.columns[1:33]
     entidad = st.selectbox("Selecciona una entidad:", entidades)
     if entidad == (f"{entidad}"):
-        st.plotly_chart(graph_estatal(semana_entidad, "semana", f"{entidad}", ""))
+        st.plotly_chart(graph_estatal(semana_entidad, "semana", f"{entidad}"))
 
     # Por entidad.
     st.subheader("Casos positivos semanales, todas las entidades")
@@ -187,16 +192,14 @@ elif selection == "Defunciones diarias":
     st.subheader("Defunciones diarias")
 
     # Nacional
-    st.plotly_chart(graph_nac(death1, "Fecha", "defunciones"))
+    st.plotly_chart(graph_nac(death1, "Fecha"))
 
     # Cada entidad
     st.subheader("Defunciones diarias, por entidad")
     entidades = contagios_estatal.columns[1:33]
     entidad = st.selectbox("Selecciona una entidad:", entidades)
     if entidad == (f"{entidad}"):
-        st.plotly_chart(
-            graph_estatal(muertes_estatal, "Fecha", f"{entidad}", "defunciones")
-        )
+        st.plotly_chart(graph_estatal(muertes_estatal, "Fecha", f"{entidad}"))
 
     # Por entidad
     st.subheader("Defunciones diarias, por entidad")
@@ -207,16 +210,14 @@ elif selection == "Defunciones semanales":
     st.subheader("Defunciones semanales")
 
     # Nacional
-    st.plotly_chart(graph_nac(death2, "semana", "defunciones"))
+    st.plotly_chart(graph_nac(death2, "semana"))
 
     # Cada entidad
     st.subheader("Defunciones semanales, por entidad")
     entidades = contagios_estatal.columns[1:33]
     entidad = st.selectbox("Selecciona una entidad:", entidades)
     if entidad == (f"{entidad}"):
-        st.plotly_chart(
-            graph_estatal(muerte_semana_entidad, "semana", f"{entidad}", "defunciones")
-        )
+        st.plotly_chart(graph_estatal(muerte_semana_entidad, "semana", f"{entidad}"))
 
     # Por entidad
     st.subheader("Defunciones semanales, todas las entidades")
