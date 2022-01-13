@@ -8,9 +8,7 @@ from datetime import date
 
 today = date.today()
 
-st.set_page_config(
-    layout="wide",
-)
+st.set_page_config(layout="wide")
 
 st.title("COVID-19 en México")
 
