@@ -124,8 +124,8 @@ with st.sidebar.expander("Click para conocer más de estas gráficas"):
     - La fuente de los datos es la 
     [Secretaría de Salud Federal.](https://www.gob.mx/salud/documentos/datos-abiertos-bases-historicas-direccion-general-de-epidemiologia?idiom=es)
     
-    - Están graficadas las **frecuencias totales** Por eso, cada gráfica tiene su propio eje. 
-    Para realizar comparaciones, se podría usar otras métricas, por ejemplo la tasa de positivos/defunciones 
+    - Están graficadas las **frecuencias totales**, por eso, cada gráfica tiene su propio eje. 
+    Para realizar comparaciones, se podrían usar otras métricas, por ejemplo la tasa de positivos/defunciones 
     por cien mil habitantes.
 
     - En el caso de los casos positivos, estoy graficando respecto **al día que se presentaron síntomas**.
@@ -134,8 +134,6 @@ with st.sidebar.expander("Click para conocer más de estas gráficas"):
     [SINAVE](https://covid19.sinave.gob.mx/) o el [tablero de Conacyt](https://datos.covid-19.conacyt.mx/)
      que se ubica en el micro sitio de COVID-19 de de la propia Secretaría de Salud.
     Para CDMX, el sitio del [Gobierno local](https://covid19.cdmx.gob.mx/) es imprescindible.
-
-    - Debido al tamaño de la base de datos, aquí solo se usan subconjuntos de la base principoal
 
     📪 **[@l_venegas](https://twitter.com/l_venegas)**
 
