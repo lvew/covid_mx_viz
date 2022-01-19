@@ -37,8 +37,7 @@ def graph_nac(base, tiempo: str):
         height=600,
     )
     fig.update_layout(
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(10,10,10,0)",
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(10,10,10,0)",
     )
     if (base is death1) or (base is death2):
         fig.update_traces(marker_color="gray")
@@ -53,9 +52,7 @@ def graph_tot(base, tiempo: str):
     plot_cols = 4
 
     fig = make_subplots(
-        rows=plot_rows,
-        cols=plot_cols,
-        subplot_titles=base.columns[1:],
+        rows=plot_rows, cols=plot_cols, subplot_titles=base.columns[1:],
     )
 
     # add traces
@@ -64,10 +61,7 @@ def graph_tot(base, tiempo: str):
         for j in range(1, plot_cols + 1):
             # print(str(i)+ ', ' + str(j))
             fig.add_trace(
-                go.Bar(
-                    x=base[f"{tiempo}"],
-                    y=base[base.columns[x]].values,
-                ),
+                go.Bar(x=base[f"{tiempo}"], y=base[base.columns[x]].values,),
                 row=i,
                 col=j,
             )
@@ -165,12 +159,7 @@ elif selection == "Positivos semanales":
     st.subheader("Casos positivos semanales, por fecha de síntoma")
 
     # Nacional
-    st.plotly_chart(
-        graph_nac(
-            contagsemanal,
-            "semana",
-        )
-    )
+    st.plotly_chart(graph_nac(contagsemanal, "semana",))
 
     # Cada entidad
     st.subheader("Casos positivos semanales, por entidad")
